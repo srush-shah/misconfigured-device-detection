@@ -1,31 +1,35 @@
 # Core Data Science Libraries
-pandas>=1.5.0
-# Note: If models were saved with numpy 2.0+, you need numpy>=2.0.0 to load them
-# If models were saved with numpy 1.x, use numpy>=1.23.0,<2.0.0
-numpy>=1.23.0
-scikit-learn>=1.2.0
+pandas>=1.5.0,<3.0.0
+# Note: numpy 2.0+ has breaking changes. Using 1.x for compatibility with scikit-learn and other packages
+# If you need numpy 2.0+, ensure all dependencies support it
+numpy>=1.23.0,<2.0.0
+scikit-learn>=1.2.0,<2.0.0
+
+# Model Serialization (required for loading saved models)
+# joblib is a dependency of scikit-learn but explicitly listed for clarity
+joblib>=1.2.0
 
 # Deep Learning
-torch>=2.0.0
+torch>=2.0.0,<3.0.0
 
 # Visualization
-matplotlib>=3.6.0
-seaborn>=0.12.0
-plotly>=5.17.0
+matplotlib>=3.6.0,<4.0.0
+seaborn>=0.12.0,<1.0.0
+plotly>=5.17.0,<6.0.0
 
 # Imbalanced Data Handling
-imbalanced-learn>=0.11.0
+imbalanced-learn>=0.11.0,<1.0.0
 
 # Gradient Boosting (for improved classifiers)
-xgboost>=2.0.0
+xgboost>=2.0.0,<3.0.0
 
 # Web Application
-streamlit>=1.28.0
+streamlit>=1.28.0,<2.0.0
 
-# Jupyter Notebook Support (optional but recommended)
-ipykernel>=6.25.0
-jupyter>=1.0.0
+# Jupyter Notebook Support (optional but recommended for training)
+ipykernel>=6.25.0,<8.0.0
+jupyter>=1.0.0,<2.0.0
 
 # Utilities (optional)
-requests>=2.28.0
-beautifulsoup4>=4.11.0
+requests>=2.28.0,<3.0.0
+beautifulsoup4>=4.11.0,<5.0.0
