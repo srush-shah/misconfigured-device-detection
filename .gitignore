@@ -1,0 +1,81 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints
+
+# Log files
+*.log
+*.log.*
+
+# Network capture files
+*.pcap
+*.pcapng
+
+# Data files (keep structure, ignore actual data)
+data/raw/westermo/data/
+data/output/*.csv
+!data/output/.gitkeep
+
+# Generated features and data files
+features.csv
+flows.csv
+realtime_flows.csv
+realtime_features.csv
+
+# Model files (large)
+models/saved/*.pkl
+!models/saved/.gitkeep
+
+# Export files
+*_export.csv
+*export.csv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Synthetic test data (keep generator, ignore outputs)
+examples/*.csv
+!examples/README.md
+
+
+*/.history
