@@ -60,6 +60,8 @@ models/saved/*.pkl
 # IDE
 .vscode/
 .idea/
+.history/
+*/.history/
 *.swp
 *.swo
 *~
@@ -76,6 +78,3 @@ Thumbs.db
 # Synthetic test data (keep generator, ignore outputs)
 examples/*.csv
 !examples/README.md
-
-
-*/.history
