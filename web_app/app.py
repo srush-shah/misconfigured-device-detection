@@ -637,7 +637,7 @@ def main():
         st.header("⚙️ Configuration")
         st.markdown("### Model Selection")
         st.info("**Best Model**: Improved RandomForest (Auto-selected)")
-        st.markdown("*Balanced Accuracy: 0.91 | Accuracy: 0.83*")
+        st.markdown("*Balanced Accuracy: 0.6548 | Accuracy: 0.3409*")
         
         # Model selection (hidden, auto-uses best model)
         model_type = "Improved RandomForest"  # Best model based on balanced accuracy
@@ -758,7 +758,7 @@ def main():
                     
                     # Show loading
                     with st.spinner("Analyzing device..."):
-                        # Use best model: Improved RandomForest (best balanced accuracy: 0.91)
+                        # Use best model: Improved RandomForest (best balanced accuracy: 0.6548)
                         if PIPELINE_AVAILABLE:
                             models = load_trained_models()
                             
@@ -841,7 +841,7 @@ def main():
                                 if use_demo:
                                     result = predict_single_device_demo(row_df, confidence_threshold)
                                 else:
-                                    # Use best model: Improved RandomForest (best balanced accuracy)
+                                    # Use best model: Improved RandomForest (best balanced accuracy: 0.6548)
                                     model = models.get('improved_rf') or models.get('ensemble') or models.get('xgb')
                                     result = predict_single_device(pipeline, model, row_df, use_hybrid_mode=use_hybrid_mode)
                                 
@@ -941,7 +941,7 @@ def main():
                         if use_demo:
                             result = predict_single_device_demo(row_df, confidence_threshold)
                         else:
-                            # Use best model: Improved RandomForest (best balanced accuracy)
+                            # Use best model: Improved RandomForest (best balanced accuracy: 0.6548)
                             model = models.get('improved_rf') or models.get('ensemble') or models.get('xgb')
                             if model is None:
                                 result = {'error': 'No trained model available. Please train models first.'}
@@ -971,32 +971,33 @@ def main():
         st.markdown("""
         ### Best Model: Improved RandomForest
         
-        **Selected Model**: Improved RandomForest (with hyperparameter tuning)
+        **Selected Model**: Improved RandomForest (with hyperparameter tuning and threshold optimization)
         
         **Performance Metrics:**
-        - **Balanced Accuracy**: 0.9079 (90.79%)
-        - **Accuracy**: 0.8250 (82.50%)
-        - **ROC-AUC**: ~0.87
-        - **Average Precision**: ~0.24
+        - **Balanced Accuracy**: 0.6548 (65.48%)
+        - **Accuracy**: 0.3409 (34.09%)
+        - **ROC-AUC**: 0.6012
+        - **Average Precision**: 0.1156
+        - **Misconfig Recall**: 100%
         
         ### Why This Model?
         
         The **Improved RandomForest** model is selected as the best model because:
-        1. **Highest Balanced Accuracy** (0.91) - Best for imbalanced datasets
-        2. **Good Overall Accuracy** (0.83) - Reliable predictions
+        1. **Highest Balanced Accuracy** (0.6548) - Best for imbalanced datasets
+        2. **Perfect Misconfig Recall** (100%) - Critical for security applications
         3. **Hyperparameter Tuned** - Optimized for the dataset
-        4. **Feature Importance** - Provides interpretable results
+        4. **Threshold Optimized** - Prioritizes misconfiguration detection
+        5. **Feature Importance** - Provides interpretable results
         
         ### Model Comparison
         
         | Model | Accuracy | Balanced Accuracy |
         |-------|----------|-------------------|
-        | Improved RandomForest | 0.8250 | **0.9079** ⭐ |
-        | Ensemble | ~0.82 | ~0.88 |
-        | XGBoost | ~0.81 | ~0.85 |
-        | Baseline RandomForest | 0.90 | 0.47 |
+        | Improved RandomForest | 0.3409 | **0.6548** ⭐ |
+        | Ensemble | 0.8636 | 0.4524 |
+        | Baseline RandomForest | 0.9091 | 0.4762 |
         
-        **Note**: Balanced accuracy is prioritized because the dataset is imbalanced.
+        **Note**: Balanced accuracy and misconfig recall are prioritized because the dataset is imbalanced. The accuracy drop is expected when optimizing for recall.
         """)
         
         # Show model info if available

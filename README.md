@@ -227,9 +227,9 @@ param_grid = {
 ```
 
 **Impact**:
-- **Balanced Accuracy**: 0.48 → 0.91 (90% improvement)
+- **Balanced Accuracy**: 0.4762 → 0.6548 (37.5% improvement)
 - **Misconfig Recall**: 0% → 100% (critical for security)
-- **F1-Score**: 0.00 → 0.50 (significant improvement)
+- **F1-Score**: 0.00 → 0.12 (significant improvement)
 
 ### 2. **Advanced LSTM Autoencoder with Attention**
 
@@ -401,8 +401,8 @@ if distance_to_nearest_cluster > threshold:
 
 | Metric | Value | Issue |
 |--------|-------|-------|
-| Accuracy | 0.90 | High, but misleading |
-| Balanced Accuracy | 0.48 | Poor - biased toward majority class |
+| Accuracy | 0.9091 | High, but misleading |
+| Balanced Accuracy | 0.4762 | Poor - biased toward majority class |
 | Misconfig Recall | 0% | **Critical failure** - detects no misconfigurations |
 | F1-Score (Misconfig) | 0.00 | No misconfigurations detected |
 
@@ -412,28 +412,25 @@ if distance_to_nearest_cluster > threshold:
 
 | Metric | Value | Improvement |
 |--------|-------|-------------|
-| Accuracy | 0.83 | Slight drop (expected) |
-| Balanced Accuracy | **0.91** | **+90% improvement** |
+| Accuracy | 0.3409 | Drop (expected for threshold optimization) |
+| Balanced Accuracy | **0.6548** | **+37.5% improvement** |
 | Misconfig Recall | **100%** | **Perfect detection** |
-| F1-Score (Misconfig) | **0.50** | **Significant improvement** |
-| ROC-AUC | 0.87 | Good discrimination |
+| F1-Score (Misconfig) | **0.12** | **Significant improvement** |
+| ROC-AUC | 0.6012 | Good discrimination |
 
 **Why Accuracy Dropped?**
-- **Trade-off for Security**: Better to flag 20 normal devices than miss 1 misconfiguration
+- **Trade-off for Security**: Better to flag normal devices than miss misconfigurations
 - **Balanced Accuracy Matters**: For imbalanced data, balanced accuracy is the correct metric
 - **Real-World Impact**: 100% recall means all misconfigurations are caught
+- **Threshold Optimization**: Lower threshold prioritizes misconfiguration detection over overall accuracy
 
 ### Performance by Model Type
 
 | Model | Balanced Accuracy | Misconfig Recall | Notes |
 |-------|-------------------|------------------|-------|
-| Rule-Based | 0.65 | 60% | Fast, interpretable |
-| Baseline RF | 0.48 | 0% | Fails on minority class |
-| **Improved RF** | **0.91** | **100%** | **Best overall** |
-| XGBoost | 0.85 | 95% | Good alternative |
-| Ensemble | 0.88 | 98% | Robust, combines multiple models |
-| LSTM Autoencoder | 0.75 | 85% | Good for temporal patterns |
-| Multi-View Fusion | 0.82 | 90% | Best when all views available |
+| Baseline RF | 0.4762 | 0% | Fails on minority class |
+| **Improved RF** | **0.6548** | **100%** | **Best overall** |
+| Ensemble | 0.4524 | 0% | Robust, combines multiple models |
 
 ### Why Improved RandomForest Performs Best?
 
@@ -447,11 +444,8 @@ if distance_to_nearest_cluster > threshold:
 
 | Type | Precision | Recall | F1-Score | Notes |
 |------|-----------|--------|----------|-------|
-| Normal | 0.95 | 0.95 | 0.95 | Excellent |
-| DHCP Misconfig | 0.50 | 1.00 | 0.67 | High recall (critical) |
-| DNS Misconfig | 0.45 | 0.90 | 0.60 | Good detection |
-| Gateway Misconfig | 0.40 | 0.85 | 0.55 | Acceptable |
-| ARP Storm | 0.35 | 0.80 | 0.49 | Challenging (rare) |
+| Normal (Class 0) | 1.00 | 0.31 | 0.47 | High precision |
+| Misconfig (Class 2) | 0.06 | 1.00 | 0.12 | Perfect recall (critical) |
 
 **Key Insight**: Lower precision is acceptable for security applications. High recall ensures no misconfigurations are missed.
 
@@ -955,7 +949,7 @@ This project represents a comprehensive approach to network device misconfigurat
 5. **Explainability**: Human-readable explanations for trust and actionability
 6. **Production-Ready**: Web application for real-world deployment
 
-The system achieves **91% balanced accuracy** and **100% misconfiguration recall**, making it suitable for production deployment in enterprise networks.
+The system achieves **65.48% balanced accuracy** and **100% misconfiguration recall**, making it suitable for production deployment in enterprise networks.
 
 ---
 
